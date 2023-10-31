@@ -7,21 +7,15 @@ class NvmAutoLoader < Formula
     bin.install "nvm-auto-loader.sh"
   end
 
-  def caveats
-    <<~EOS
-      #{Tty.bold}IMPORTANT:#{Tty.reset}
-      
-      To finish the installation, you need to source the script in your shell:
-      
-      #{Tty.underline}For zsh#{Tty.reset}, add the following to your #{Tty.underline}~/.zshrc#{Tty.reset}:
-        #{Tty.green}source #{opt_prefix}/bin/nvm-auto-loader.sh#{Tty.reset}
-      
-      #{Tty.underline}For bash#{Tty.reset}, add the following to your #{Tty.underline}~/.bash_profile#{Tty.reset} or #{Tty.underline}~/.bashrc#{Tty.reset}:
-        #{Tty.green}source #{opt_prefix}/bin/nvm-auto-loader.sh#{Tty.reset}
-    EOS
+  def post_install
+    opoo "IMPORTANT: Post-installation steps:"
+    puts "\nTo finish the installation, you need to source the script in your shell:\n\n"
+    puts "For zsh, add the following to your ~/.zshrc:"
+    puts "  source #{opt_prefix}/bin/nvm-auto-loader.sh\n\n"
+    puts "For bash, add the following to your ~/.bash_profile or ~/.bashrc:"
+    puts "  source #{opt_prefix}/bin/nvm-auto-loader.sh\n\n"
   end
   
-
   test do
     # Here you can define tests for your utility.
   end

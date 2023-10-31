@@ -3,6 +3,7 @@ class NvmAutoLoader < Formula
   homepage "https://github.com/woongbae-ra/nvm-auto-loader#readme"
   url "https://github.com/woongbae-ra/nvm-auto-loader/archive/v0.1.0.tar.gz"
   head "https://github.com/woongbae-ra/nvm-auto-loader.git"
+  sha "867d0ca4b4c0471b82a4f8b41f90c05e4db40a288303d3a326b727bc11cf7127"
 
   def install
     bin.install "nvm-auto-loader.sh"

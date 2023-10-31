@@ -33,7 +33,10 @@ nvm_auto_loader() {
 
   # Only switch versions if a valid version is specified
   if [ -n "$node_version" ]; then
-    [ "$(nvm_version_path $node_version)/bin" = "$NVM_BIN" ] || nvm use "$node_version"
+    current_version=$(nvm current)
+    if [ "$current_version" != "$node_version" ]; then
+      nvm use "$node_version"
+    fi
   else
     echo "No default Node.js version set, run 'nvm alias default <version>' to set it."
   fi

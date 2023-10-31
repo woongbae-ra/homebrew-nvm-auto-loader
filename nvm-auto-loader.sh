@@ -54,3 +54,6 @@ if [ -n "$ZSH_VERSION" ]; then
   autoload -U add-zsh-hook
   add-zsh-hook chpwd nvm_auto_loader
 fi
+
+# Run nvm_auto_loader on shell init
+nvm_auto_loader

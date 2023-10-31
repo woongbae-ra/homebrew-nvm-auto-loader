@@ -8,12 +8,17 @@ class NvmAutoLoader < Formula
   end
 
   def post_install
-    opoo "IMPORTANT: Post-installation steps:"
-    puts "\nTo finish the installation, you need to source the script in your shell:\n\n"
-    puts "For zsh, add the following to your ~/.zshrc:"
-    puts "  source #{opt_prefix}/bin/nvm-auto-loader.sh\n\n"
-    puts "For bash, add the following to your ~/.bash_profile or ~/.bashrc:"
-    puts "  source #{opt_prefix}/bin/nvm-auto-loader.sh\n\n"
+    # For ~/.zshrc
+    zshrc_path = Pathname.new("#{ENV["HOME"]}/.zshrc")
+    if zshrc_path.exist? && !zshrc_path.read.include?("source #{opt_prefix}/bin/nvm-auto-loader.sh")
+        system "echo", "'source #{opt_prefix}/bin/nvm-auto-loader.sh'", ">>", zshrc_path
+    end
+
+    # For ~/.bash_profile
+    bash_profile_path = Pathname.new("#{ENV["HOME"]}/.bash_profile")
+    if bash_profile_path.exist? && !bash_profile_path.read.include?("source #{opt_prefix}/bin/nvm-auto-loader.sh")
+        system "echo", "'source #{opt_prefix}/bin/nvm-auto-loader.sh'", ">>", bash_profile_path
+    end
   end
   
   test do

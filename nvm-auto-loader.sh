@@ -11,38 +11,28 @@ fi
 # Automatically find .nvmrc and use it
 last_nvmrc_path=""
 nvm_auto_loader() {
-  local node_version
+  # 적합한 .nvmrc 파일을 찾는다
   local nvmrc_path=$(nvm_find_nvmrc)
-
-  # Check if we're still in the same directory with an .nvmrc file
-  if [ -n "$nvmrc_path" ] && [ "$nvmrc_path" = "$last_nvmrc_path" ]; then
-    return
-  fi
-
-  if [ -z "$nvmrc_path" ]; then
-    # Revert to default version if no .nvmrc file is found
-    node_version="$(nvm_alias default 2>/dev/null || echo)"
-  else
-    node_version=$(cat "$nvmrc_path")
-    # Install the version from .nvmrc if it's not installed
-    if ! nvm ls "$node_version" > /dev/null 2>&1; then
-      echo "Version specified in .nvmrc ($node_version) not found, installing..."
-      nvm install "$node_version"
+  if [ -n "$nvmrc_path" ]; then
+    # last_nvmrc_path가 그대로면, 아무것도 하지 않는다 
+    if [ -n "$nvmrc_path" ] && [ "$nvmrc_path" = "$last_nvmrc_path" ]; then
+      return
     fi
-  fi
-
-  # Only switch versions if a valid version is specified
-  if [ -n "$node_version" ]; then
-    current_version=$(nvm current)
-    if [ "$current_version" != "$node_version" ]; then
-      nvm use "$node_version"
+    # 필요한 node 버전이 설치되어 있지 않으면 설치한다
+    local version_required=$(cat "$nvmrc_path")
+    if ! nvm ls "$version_required" > /dev/null 2>&1; then
+      echo "Version specified in .nvmrc ($version_required) not found, installing..."
+      nvm install "$version_required"
     fi
-  else
-    echo "No default Node.js version set, run 'nvm alias default <version>' to set it."
+    nvm use
+    last_nvmrc_path="$nvmrc_path"
+  elif [[ $(nvm version) != $(nvm version default) ]]; then
+    # .nvmrc 파일이 없으면 기본 버전으로 되돌린다
+    if [ -n "$last_nvmrc_path" ]; then
+      nvm use default
+    fi
+    last_nvmrc_path=""
   fi
-
-  # Cache the .nvmrc path so we don't keep looking it up
-  last_nvmrc_path="$nvmrc_path"
 }
 
 # Override the 'cd' command for Bash

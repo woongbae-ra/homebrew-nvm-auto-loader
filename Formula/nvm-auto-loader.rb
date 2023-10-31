@@ -13,10 +13,15 @@ class NvmAutoLoader < Formula
     reset = "\033[0m"
     bold = "\033[1m"
   
-    puts "\n#{green}🎉  nvm-auto-loader is installed successfully! #{reset}\n\n"
-    puts "#{bold}To finalize the installation, add the following line to your shell configuration:#{reset}\n\n"
-    puts "  #{green}source #{opt_prefix}/bin/nvm-auto-loader.sh#{reset}\n\n"
-    puts "Typically, this would be in your #{bold}~/.zshrc#{reset} or #{bold}~/.bash_profile#{reset}.\n\n"
+    puts "\n#{green}🎉  nvm-auto-loader has been successfully installed! #{reset}\n\n"
+    puts "#{bold}To finalize the installation, follow these guidelines:#{reset}\n\n"
+    
+    puts "1️⃣  Add the line below to your shell configuration file (e.g., ~/.zshrc or ~/.bash_profile):\n\n"
+    puts "     #{green}source #{opt_prefix}/bin/nvm-auto-loader.sh#{reset}\n\n"
+    
+    puts "2️⃣  Restart your terminal or run the following commands based on your shell:\n\n"
+    puts "     #{green}source ~/.zshrc#{reset} (for zsh users)\n"
+    puts "     #{green}source ~/.bash_profile#{reset} (for bash users)\n\n"
   end
   
   test do

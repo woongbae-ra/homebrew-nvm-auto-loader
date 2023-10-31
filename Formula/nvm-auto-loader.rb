@@ -11,14 +11,16 @@ class NvmAutoLoader < Formula
     # For ~/.zshrc
     zshrc_path = Pathname.new("#{ENV["HOME"]}/.zshrc")
     if zshrc_path.exist? && !zshrc_path.read.include?("source #{opt_prefix}/bin/nvm-auto-loader.sh")
-        system "echo", "'source #{opt_prefix}/bin/nvm-auto-loader.sh'", ">>", zshrc_path
+      system "echo", "'source #{opt_prefix}/bin/nvm-auto-loader.sh'", ">>", zshrc_path
     end
 
     # For ~/.bash_profile
     bash_profile_path = Pathname.new("#{ENV["HOME"]}/.bash_profile")
     if bash_profile_path.exist? && !bash_profile_path.read.include?("source #{opt_prefix}/bin/nvm-auto-loader.sh")
-        system "echo", "'source #{opt_prefix}/bin/nvm-auto-loader.sh'", ">>", bash_profile_path
+      system "echo", "'source #{opt_prefix}/bin/nvm-auto-loader.sh'", ">>", bash_profile_path
     end
+
+    echo "nvm-auto-loader is installed successfully! Please restart your terminal."
   end
   
   test do

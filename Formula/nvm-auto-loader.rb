@@ -9,15 +9,18 @@ class NvmAutoLoader < Formula
 
   def caveats
     <<~EOS
+      #{Tty.bold}IMPORTANT:#{Tty.reset}
+      
       To finish the installation, you need to source the script in your shell:
       
-      For zsh, add the following to your ~/.zshrc:
-        source #{opt_prefix}/bin/nvm-auto-loader.sh
+      #{Tty.underline}For zsh#{Tty.reset}, add the following to your #{Tty.underline}~/.zshrc#{Tty.reset}:
+        #{Tty.green}source #{opt_prefix}/bin/nvm-auto-loader.sh#{Tty.reset}
       
-      For bash, add the following to your ~/.bash_profile or ~/.bashrc:
-        source #{opt_prefix}/bin/nvm-auto-loader.sh
+      #{Tty.underline}For bash#{Tty.reset}, add the following to your #{Tty.underline}~/.bash_profile#{Tty.reset} or #{Tty.underline}~/.bashrc#{Tty.reset}:
+        #{Tty.green}source #{opt_prefix}/bin/nvm-auto-loader.sh#{Tty.reset}
     EOS
   end
+  
 
   test do
     # Here you can define tests for your utility.

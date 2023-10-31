@@ -29,7 +29,6 @@ nvm_auto_loader() {
       echo "Version specified in .nvmrc ($node_version) not found, installing..."
       nvm install "$node_version"
     fi
-    last_nvmrc_path="$nvmrc_path"
   fi
 
   # Only switch versions if a valid version is specified
@@ -38,6 +37,9 @@ nvm_auto_loader() {
   else
     echo "No default Node.js version set, run 'nvm alias default <version>' to set it."
   fi
+
+  # Cache the .nvmrc path so we don't keep looking it up
+  last_nvmrc_path="$nvmrc_path"
 }
 
 # Override the 'cd' command for Bash

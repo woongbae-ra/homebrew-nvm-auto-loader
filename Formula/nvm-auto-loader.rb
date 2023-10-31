@@ -8,25 +8,15 @@ class NvmAutoLoader < Formula
   end
 
   def post_install
-    scripts = "source #{opt_prefix}/bin/nvm-auto-loader.sh"
-    
-    # For ~/.zshrc
-    zshrc_path = Pathname.new("#{ENV["HOME"]}/.zshrc")
-    if zshrc_path.exist? && !zshrc_path.read.include?(scripts)
-      zshrc_path.open('a') do |file|
-        file.puts scripts
-      end
-    end
-
-    # For ~/.bash_profile
-    bash_profile_path = Pathname.new("#{ENV["HOME"]}/.bash_profile")
-    if bash_profile_path.exist? && !bash_profile_path.read.include?(scripts)
-      bash_profile_path.open('a') do |file|
-        file.puts scripts
-      end
-    end
-
-    puts "nvm-auto-loader is installed successfully! Please restart your terminal."
+    # Formatting with color
+    green = "\033[1;32m"
+    reset = "\033[0m"
+    bold = "\033[1m"
+  
+    puts "\n#{green}🎉  nvm-auto-loader is installed successfully! #{reset}\n\n"
+    puts "#{bold}To finalize the installation, add the following line to your shell configuration:#{reset}\n\n"
+    puts "  #{green}source #{opt_prefix}/bin/nvm-auto-loader.sh#{reset}\n\n"
+    puts "Typically, this would be in your #{bold}~/.zshrc#{reset} or #{bold}~/.bash_profile#{reset}.\n\n"
   end
   
   test do

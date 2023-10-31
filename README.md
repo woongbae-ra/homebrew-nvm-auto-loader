@@ -1,6 +1,6 @@
 # nvm-auto-loader
 
-Automatically use Node versions based on .nvmrc by using nvm
+Automatically loads Node versions based on `.nvmrc` by using nvm. Supports both `zsh` and `bash`.
 
 ## 🚀 Installation
 

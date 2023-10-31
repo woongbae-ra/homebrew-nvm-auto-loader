@@ -1,7 +1,8 @@
 class NvmAutoLoader < Formula
   desc "Automatically loads Node versions based on .nvmrc by using nvm (supports zsh and bash)"
   homepage "https://github.com/woongbae-ra/nvm-auto-loader#readme"
-  url "https://github.com/woongbae-ra/nvm-auto-loader/archive/v1.0.0.tar.gz"
+  url "https://github.com/woongbae-ra/nvm-auto-loader/archive/v0.1.0.tar.gz"
+  head "https://github.com/woongbae-ra/nvm-auto-loader.git"
 
   def install
     bin.install "nvm-auto-loader.sh"

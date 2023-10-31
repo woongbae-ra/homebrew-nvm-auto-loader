@@ -1,5 +1,5 @@
 # Ensure nvm is available
-if [ "$(command -v nvm)" == "" ]; then
+if [ "$(command -v nvm)" = "" ]; then
   if [ -s "$NVM_DIR/nvm.sh" ]; then
     source "$NVM_DIR/nvm.sh"
   else
@@ -34,7 +34,7 @@ nvm_auto_loader() {
 
   # Only switch versions if a valid version is specified
   if [ -n "$node_version" ]; then
-    [ "$(nvm_version_path $node_version)/bin" == "$NVM_BIN" ] || nvm use "$node_version"
+    [ "$(nvm_version_path $node_version)/bin" = "$NVM_BIN" ] || nvm use "$node_version"
   else
     echo "No default Node.js version set, run 'nvm alias default <version>' to set it."
   fi

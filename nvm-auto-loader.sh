@@ -1,16 +1,22 @@
+nvm_installed=true
+
 # Ensure nvm is available
 if [ "$(command -v nvm)" = "" ]; then
   if [ -s "$NVM_DIR/nvm.sh" ]; then
     source "$NVM_DIR/nvm.sh"
   else
     echo "Could not find nvm, install it with https://github.com/nvm-sh/nvm#installing-and-updating"
-    exit 1
+    nvm_installed=false
   fi
 fi
 
 # Automatically find .nvmrc and use it
 last_nvmrc_path=""
 nvm_auto_loader() {
+  if [ "$nvm_installed" = "false" ]; then
+    return
+  fi 
+
   # 적합한 .nvmrc 파일을 찾는다
   local nvmrc_path=$(nvm_find_nvmrc)
   if [ -n "$nvmrc_path" ]; then
